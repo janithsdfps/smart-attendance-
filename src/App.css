@@ -1,38 +1,374 @@
-.App {
+
+/* Dashboard screen */
+/* Sidebar container with transition */
+.sidebar {
+  background-color: #3b3b3b;
+  color: white;
+  width: 200px;
+  padding: 20px;
+  height: 100vh;
+  position: fixed;
+  top: 0;
+  left: 0;
+  transform: translateX(-100%); /* Start hidden */
+  transition: transform 0.3s ease-in-out; /* Transition for sliding effect */
+  z-index: 1000; /* Ensure it appears above other content */
+  display: flex;
+  flex-direction: column; /* Ensure the button stays at the top */
+}
+
+.sidebar .toggle-sidebar-button {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  padding: 10px;
+  background-color: #343a40;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  z-index: 1001; /* Ensure the button is above the sidebar content */
+}
+
+/* When sidebar is visible */
+.sidebar.visible {
+  transform: translateX(0); /* Move into view */
+}
+
+.show-sidebar-button {
+  position: fixed;
+  top: 10px;
+  left: 10px;
+  padding: 10px;
+  background-color: #343a40;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  z-index: 1001; /* Ensure the button is above other content */
+}
+
+.show-sidebar-button:hover {
+  background-color: #495057;
+}
+
+/* Main content area with transition */
+.dashboard-layout {
+  display: flex;
+  flex-direction: row;
+  transition: margin-left 0.3s ease-in-out; /* Transition for content shift */
+}
+
+.dashboard-layout.with-sidebar {
+  margin-left: 0; /* Adjust content margin when sidebar is hidden */
+}
+
+.dashboard-layout.with-sidebar .sidebar {
+  transform: translateX(-100%); /* Hide sidebar */
+}
+
+.toggle-sidebar-button {
+  position: fixed;
+  top: 10px;
+  left: 10px;
+  padding: 10px 20px;
+  background-color: #343a40;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  z-index: 1000; /* Ensure the button is above other content */
+}
+
+.toggle-sidebar-button:hover {
+  background-color: #495057;
+}
+
+
+.sidebar h2 {
+  margin-bottom: 20px;
+}
+
+.sidebar nav ul {
+  list-style: none;
+  padding: 0;
+}
+
+.sidebar nav ul li {
+  margin: 10px 0;
+  cursor: pointer;
+}
+
+.dashboard-content {
+  flex: 1;
+  padding: 20px;
+  background-color: #f0f0f0;
+}
+
+.dash-header {
+  display: flex;
+  align-items: center;
+  padding: 10px 20px;
+  background-color: #f0f0f0; /* Optional: Adjust if you have a different background color */
+  border-bottom: 1px solid #ddd; /* Optional: Add a border for visual separation */
+  position: relative; /* Set relative positioning for child absolute positioning */
+}
+
+.dash-header .date {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 18px;
+}
+
+.dash-header .search-bar {
+  position: absolute;
+  right: 0;
+  padding: 8px;
+}
+
+
+.summary-cards {
+  display: flex;
+  justify-content: space-between;
+  margin: 20px 0;
+}
+
+.summary-card {
+  background-color: #b18843;
+  color: white;
+  padding: 20px;
   text-align: center;
+  border-radius: 10px;
+  flex: 1;
+  margin: 0 10px;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.summary-card h3 {
+  margin: 5px 0;
+  font-size: 30px;
+}
+.summary-card p {
+  margin: 5px 0;
+  font-size: 20px;
+}
+.icon{
+  font-size: 40px;
+}
+.lists-and-details {
+  display: flex;
+  justify-content: space-between;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.lists {
+  display: flex;
+  flex-direction: column;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.attendance-details {
+  background-color: white;
+  padding: 0 20px;
+  border-radius: 10px;
+  margin: 10px 0;
+  width: 300px;
+}
+.student-list, .employee-list {
+  display: flex;
+  flex-direction: column;
+  justify-content: center; /* Centers the list items vertically */
+  align-items: flex-start; /* Aligns the list items to the start of the container (left) */
+  background-color: white;
+  padding: 0 20px;
+  border-radius: 10px;
+  margin: 10px 0;
+  width: 300px;
+}
+
+.attendance-details {
+  flex: 1;
+}
+
+.list-item {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.profile-pic {
+  width: 40px; 
+  height: 40px; 
+  border-radius: 50%; 
+  margin-right: 10px; 
+  object-fit: cover; 
+}
+
+.student-list input, .employee-list input {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 10px;
+}
+
+.student-list ul, .employee-list ul {
+  list-style: none; 
+  padding: 0;
+}
+
+.student-list li, .employee-list li {
+  margin: 5px 0;
+  text-align: left;
+}
+
+.attendance-details table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.attendance-details th, .attendance-details td {
+  border: 1px solid #ddd;
+  padding: 10px;
+  text-align: left;
+}
+
+.attendance-details th {
+  background-color: #b18843;
+  color: white;
+}
+
+
+
+/* CHOOSE LOGIN SCREEN */
+
+
+.container {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
+  background-color: lightgray; 
+  margin: 2%;
+  border-radius: 10px;
+  overflow: hidden; 
+}
+
+.header {
+  display: flex;
+  justify-content: center;
+  background-color: #343a40; 
+  width: 100%;
+  text-align: center;
+  border-radius: 10px; 
+}
+
+.header h2 {
   color: white;
+  margin-top: 7%;
+  font-size: 50px;
+
 }
 
-.App-link {
-  color: #61dafb;
+.button-container {
+  margin-top: 15%;
+  display: flex;
+  gap: 200px;
+  margin-bottom: 8%;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.login-button {
+  background-color: #343a40; 
+  color: white;
+  border: none;
+  padding: 20px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 25px;
+  font-weight: bold;
+}
+
+.login-button:hover {
+  background-color: #495057; 
+}
+
+
+
+/* REGISTER SCREEN */
+
+.register-screen {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: #f0f0f0; 
+  overflow: hidden;
+}
+
+.register-form-container {
+  background-color: #fff;
+  padding: 40px;
+  display: flex;
+  flex-direction: column;
+  width: 300px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  margin-right: 20px; 
+}
+
+.register-form-container h2 {
+  margin-bottom: 10px;
+  font-size: 14px;
+  color: #333; 
+}
+
+.register-form-container input {
+  margin-bottom: 20px;
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.register-btn-container{
+  display: flex;
+  gap: 30px;
+}
+.register-button {
+  background-color: #343a40;
+  color: white;
+  border: none;
+  padding: 10px;
+  height: 20%;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 18px;
+}
+
+.register-button:hover {
+  background-color: #495057;
+}
+
+.register-description-container {
+  background-color: #2e2b33;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 400px;
+  text-align: center;
+  padding: 40px;
+  height: 58%;
+}
+
+.register-description-container h1 {
+  font-size: 24px;
+  margin: 0;
+}
+
+.already-acc{
+  cursor: pointer;
+  color: blue;
+}
+.already-acc:hover{
+  text-decoration: underline;
+}
+.admin-tips{
+  font-size: 13px;
+  color: red;
 }
