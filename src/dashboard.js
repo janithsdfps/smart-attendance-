@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import "./App.css";
+import { Link } from "react-router-dom";
+
 
 const Dashboard = () => {
   const [isSidebarVisible, setIsSidebarVisible] = useState(false);
@@ -54,13 +56,13 @@ const Dashboard = () => {
         <h2>AMS</h2>
         <nav>
           <ul>
-            <li>Dashboard</li>
-            <li>Profile</li>
-            <li>Student</li>
-            <li>Employees</li>
-            <li>Reports</li>
-            <li>Change Password</li>
-            <li>Logout</li>
+          <li><Link to="/dashboard">Dashboard</Link></li>
+          <li><Link to="/profile">Profile</Link></li>
+          {/* <li><Link to="/student">Student</Link></li>
+          <li><Link to="/employees">Employees</Link></li>
+          <li><Link to="/reports">Reports</Link></li>
+          <li><Link to="/change-password">Change Password</Link></li>
+          <li><Link to="/logout">Logout</Link></li> */}
           </ul>
         </nav>
       </div>

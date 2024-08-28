@@ -7,6 +7,7 @@ import Register from './register.js';
 import UserLogin from './user-login.js';
 import AdminLogin from './admin-login.js';
 import ForgotPw from './forgot-pw.js';
+import Profile from './profile.js'
 import './App.css';
 
 function App() {
@@ -20,6 +21,15 @@ function App() {
         <Route path="/user-login" element={<UserLogin/>}/>
         <Route path="/admin-login" element={<AdminLogin/>}/>
         <Route path="/forgot-pw" element={<ForgotPw/>}/>
+
+        
+        <Route path="/profile" element={<Profile />} />
+        {/* <Route path="/student" element={<Student />} />
+        <Route path="/employees" element={<Employees />} />
+        <Route path="/reports" element={<Reports />} />
+        <Route path="/change-password" element={<ChangePassword />} />
+        <Route path="/logout" element={<Logout />} /> */}
+
       </Routes>
     </div>
   );
