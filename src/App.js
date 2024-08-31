@@ -1,36 +1,45 @@
-import React from 'react';
+import React, { useState } from 'react'; // Added useState import
 import { Routes, Route } from 'react-router-dom'; // Import Routes and Route
 
 import Dashboard from './dashboard.js';
-import Choose_login from './choose-login.js';
+import ChooseLogin from './choose-login.js';
 import Register from './register.js';
 import UserLogin from './user-login.js';
 import AdminLogin from './admin-login.js';
 import ForgotPw from './forgot-pw.js';
-import Profile from './profile.js'
+import Profile from './profile.js';
 import './App.css';
+import Sidebar from './Sidebar.js';
 
 function App() {
+  const [isSidebarVisible, setIsSidebarVisible] = useState(true); // Manage sidebar state
+
+  const toggleSidebar = () => {
+    setIsSidebarVisible(!isSidebarVisible);
+  };
+
   return (
-    <div className="App">
-      {/* Define routes for different screens */}
-      <Routes>
-        <Route path="/" element={<Choose_login />} /> {/* Main login screen */}
-        <Route path="/dashboard" element={<Dashboard />} /> {/* Dashboard screen */}
-        <Route path="/register" element={<Register />} /> {/* Register screen */}
-        <Route path="/user-login" element={<UserLogin/>}/>
-        <Route path="/admin-login" element={<AdminLogin/>}/>
-        <Route path="/forgot-pw" element={<ForgotPw/>}/>
+    <div className={`dashboard-layout ${!isSidebarVisible ? "with-sidebar" : ""}`}>
+      <Sidebar isSidebarVisible={isSidebarVisible} toggleSidebar={toggleSidebar} />
 
-        
-        <Route path="/profile" element={<Profile />} />
-        {/* <Route path="/student" element={<Student />} />
-        <Route path="/employees" element={<Employees />} />
-        <Route path="/reports" element={<Reports />} />
-        <Route path="/change-password" element={<ChangePassword />} />
-        <Route path="/logout" element={<Logout />} /> */}
-
-      </Routes>
+      <div className="content">
+        {/* Define routes for different screens */}
+        <Routes>
+          <Route path="/" element={<ChooseLogin />} /> {/* Main login screen */}
+          <Route path="/dashboard" element={<Dashboard toggleSidebar={toggleSidebar} isSidebarVisible={isSidebarVisible} />} /> {/* Dashboard screen */}
+          <Route path="/register" element={<Register />} /> {/* Register screen */}
+          <Route path="/user-login" element={<UserLogin />} /> {/* User Login screen */}
+          <Route path="/admin-login" element={<AdminLogin />} /> {/* Admin Login screen */}
+          <Route path="/forgot-pw" element={<ForgotPw />} /> {/* Forgot Password screen */}
+          <Route path="/profile" element={<Profile toggleSidebar={toggleSidebar} isSidebarVisible={isSidebarVisible} />} /> {/* Profile screen */}
+          {/* Uncomment and add other routes as needed */}
+          {/* <Route path="/student" element={<Student />} />
+          <Route path="/employees" element={<Employees />} />
+          <Route path="/reports" element={<Reports />} />
+          <Route path="/change-password" element={<ChangePassword />} />
+          <Route path="/logout" element={<Logout />} /> */}
+        </Routes>
+      </div>
     </div>
   );
 }
