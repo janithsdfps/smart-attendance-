@@ -1,10 +1,10 @@
-import React, { useState } from "react";
+
 import "./App.css";
-import { Link } from "react-router-dom";
 
 
-const Dashboard = () => {
-  const [isSidebarVisible, setIsSidebarVisible] = useState(false);
+
+const Dashboard = ({isSidebarVisible,toggleSidebar }) => {
+ 
 
   const summaryData = [
     { title: "Total Students", count: 250, icon: "🎓" },
@@ -36,36 +36,13 @@ const Dashboard = () => {
   ];
 
   return (
-    <div className={`dashboard-layout ${!isSidebarVisible ? "with-sidebar" : ""}`}>
+    <div className={"dashboard-layout"}>
+
       {!isSidebarVisible && (
-        <button
-          className="show-sidebar-button"
-          onClick={() => setIsSidebarVisible(true)}
-        >
+        <button className="show-sidebar-button" onClick={toggleSidebar}>
           Show Sidebar
         </button>
       )}
-
-      <div className={`sidebar ${isSidebarVisible ? "visible" : ""}`}>
-        <button
-          className="toggle-sidebar-button"
-          onClick={() => setIsSidebarVisible(!isSidebarVisible)}
-        >
-          {isSidebarVisible ? "Hide Sidebar" : "Show Sidebar"}
-        </button>
-        <h2>AMS</h2>
-        <nav>
-          <ul>
-          <li><Link to="/dashboard">Dashboard</Link></li>
-          <li><Link to="/profile">Profile</Link></li>
-          {/* <li><Link to="/student">Student</Link></li>
-          <li><Link to="/employees">Employees</Link></li>
-          <li><Link to="/reports">Reports</Link></li>
-          <li><Link to="/change-password">Change Password</Link></li>
-          <li><Link to="/logout">Logout</Link></li> */}
-          </ul>
-        </nav>
-      </div>
 
       <div className="dashboard-content">
         <header className="dash-header">
