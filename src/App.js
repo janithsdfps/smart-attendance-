@@ -10,6 +10,7 @@ import ForgotPw from './forgot-pw.js';
 import Profile from './profile.js';
 import './App.css';
 import Sidebar from './Sidebar.js';
+import Student from './Student.js';
 
 function App() {
   const [isSidebarVisible, setIsSidebarVisible] = useState(true); // Manage sidebar state
@@ -32,10 +33,9 @@ function App() {
           <Route path="/admin-login" element={<AdminLogin />} /> {/* Admin Login screen */}
           <Route path="/forgot-pw" element={<ForgotPw />} /> {/* Forgot Password screen */}
           <Route path="/profile" element={<Profile toggleSidebar={toggleSidebar} isSidebarVisible={isSidebarVisible} />} /> {/* Profile screen */}
-          {/* Uncomment and add other routes as needed */}
-          {/* <Route path="/student" element={<Student />} />
-          <Route path="/employees" element={<Employees />} />
-          <Route path="/reports" element={<Reports />} />
+          <Route path="/student" element={<Student toggleSidebar={toggleSidebar} isSidebarVisible={isSidebarVisible} />} />
+          {/* <Route path="/employees" element={<Employees toggleSidebar={toggleSidebar} isSidebarVisible={isSidebarVisible} />} />
+          <Route path="/reports" element={<Reports toggleSidebar={toggleSidebar} isSidebarVisible={isSidebarVisible} />} />
           <Route path="/change-password" element={<ChangePassword />} />
           <Route path="/logout" element={<Logout />} /> */}
         </Routes>

@@ -1,8 +1,8 @@
 import React from 'react';
 import './profile.css';
 import './App.css'
-import './sidebar.css' // Include any styles
-import profileImage from './imgs/img1.jpeg'; // Replace with actual image path
+import './sidebar.css' 
+import profileImage from './imgs/img1.jpeg'; 
 
 function Profile({isSidebarVisible,toggleSidebar }) {
   return (
@@ -13,7 +13,7 @@ function Profile({isSidebarVisible,toggleSidebar }) {
           Show Sidebar
         </button>
       )}
-      {/* Your dashboard content */}
+     
 
       <div >
         <div >
