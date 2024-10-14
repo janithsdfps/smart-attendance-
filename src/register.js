@@ -15,7 +15,9 @@ function Register() {
   const [companyName, setCompanyName] = useState('');
   const [adminEmail, setAdminEmail] = useState('');
   const [address, setAddress] = useState('');
+  const [success, setSuccess] = useState(false); 
   const [phoneNumber, setPhoneNumber] = useState('');
+  const [companyId, setCompanyId] = useState('');
   
   // Status states
   const [loading, setLoading] = useState(false);
@@ -26,11 +28,11 @@ function Register() {
   const handleSignup = async (e) => {
     e.preventDefault();
     setLoading(true);
+    setErrorMessage('');
 
     try {
       await createUserWithEmailAndPassword(auth, email, password);
-      setSuccessMessage('Signup successful!');
-      navigate("/user-login");
+      setSuccess(true); 
     } catch (error) {
       setErrorMessage(error.message);
     }
@@ -41,38 +43,35 @@ function Register() {
   // Submit company registration details to MongoDB through Django Backend
   const handleCompanyRegister = async (e) => {
     e.preventDefault();
-    setLoading(true);
-
-    const companyData = {
-      companyName,
-      adminEmail,
-      address,
-      phoneNumber
-    };
-
     try {
-      const response = await fetch('http://localhost:8000/api/register-company', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(companyData),
-      });
+        const response = await fetch('http://localhost:8000/company/register-company/', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                companyName: companyName,
+                
+                companyId: companyId,
+                adminEmail: adminEmail,
+                address: address,
+                phoneNumber: phoneNumber,
 
-      if (response.ok) {
-        setSuccessMessage('Company successfully registered!');
-        navigate("/user-login");
-      } else {
-        setErrorMessage('Failed to register company.');
-        navigate("/user-login");
-      }
+            }),
+        });
+
+        const data = await response.json();
+        if (response.ok) {
+            alert('Company registered successfully!');
+        } else {
+            alert('Error: ' + data.error);
+            console.error('Error:', data.error);
+        }
     } catch (error) {
-      setErrorMessage('Error connecting to server.');
-      navigate("/user-login");
+        console.error('Error registering company:', error);
     }
+};
 
-    setLoading(false);
-  };
 
   // Navigate to login page
   const navigateToLogin = () => {
@@ -110,7 +109,7 @@ function Register() {
             </p>
 
             <button type="submit" className="register-button" disabled={loading}>
-              {loading ? 'Registering...' : 'Verify'}
+              {loading ? 'Verifying...' : success ? 'Verified' : 'Verify'}
             </button>
           </div>
         </form>
@@ -123,6 +122,15 @@ function Register() {
               type="text"
               value={companyName}
               onChange={(e) => setCompanyName(e.target.value)}
+              required
+            />
+          </label>
+          <label>
+            Company ID:
+            <input
+              type="text"
+              value={companyId}
+              onChange={(e) => setCompanyId(e.target.value)}
               required
             />
           </label>
@@ -162,7 +170,7 @@ function Register() {
 
         {/* Status Messages */}
         {errorMessage && <p className="error-message">{errorMessage}</p>}
-        {successMessage && <p className="success-message">{successMessage}</p>}
+        
       </div>
 
       <div className="register-description-container">
