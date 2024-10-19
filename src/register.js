@@ -51,12 +51,11 @@ function Register() {
             },
             body: JSON.stringify({
                 companyName: companyName,
-                
                 companyId: companyId,
                 adminEmail: adminEmail,
                 address: address,
                 phoneNumber: phoneNumber,
-
+                email :email,
             }),
         });
 
