@@ -20,12 +20,12 @@ companies_collection = db['company_register']  # Collection name
 
 # Generate a random password
 def generate_random_password(length=8):
-    characters = string.ascii_letters + string.digits + string.punctuation
+    characters = string.ascii_letters + string.digits + string.punctuation   #make it short 
     return ''.join(random.choice(characters) for i in range(length))
 
 # # Generate a unique Admin ID
 def generate_unique_admin_id():
-    return str(uuid.uuid4())  # Generates a unique UUID
+    return str(uuid.uuid4())[:4] # Generates a unique UUID *make it short 
 
 
 # MongoDB connection check (GET)
